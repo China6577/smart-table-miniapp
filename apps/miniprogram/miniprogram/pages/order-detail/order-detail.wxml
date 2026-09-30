@@ -1,0 +1,71 @@
+<view class="page" wx:if="{{order}}">
+  <!-- 状态横幅 -->
+  <view class="status-banner tone-{{meta.tone}}">
+    <view class="status-text">{{meta.text}}</view>
+    <view class="status-desc">{{meta.desc}}</view>
+  </view>
+
+  <!-- 状态时间线 -->
+  <view class="card timeline-card">
+    <view wx:if="{{order.cancelReason}}" class="cancel-reason">取消原因：{{order.cancelReason}}</view>
+    <view class="timeline">
+      <view class="tl-node {{node.state}}" wx:for="{{timeline}}" wx:for-item="node" wx:key="key">
+        <view class="tl-dot" />
+        <view class="tl-body">
+          <view class="tl-label">{{node.label}}</view>
+          <view class="tl-time">{{node.time}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 菜品明细 -->
+  <view class="card items-card">
+    <view class="card-title">菜品明细</view>
+    <view class="o-item" wx:for="{{order.items}}" wx:key="key">
+      <image class="o-pic" src="{{item.image}}" mode="aspectFill" />
+      <view class="o-mid">
+        <view class="o-name ellipsis">{{item.name}}</view>
+        <view wx:if="{{item.specText}}" class="o-spec ellipsis">{{item.specText}}</view>
+      </view>
+      <view class="o-right">
+        <view class="o-price">¥{{item.unitPrice}}</view>
+        <view class="o-qty">×{{item.quantity}}</view>
+      </view>
+    </view>
+    <view class="total-row">
+      <text>共 {{order.itemCount}} 件</text>
+      <view class="total">合计 <text class="price"><text class="rmb">¥</text>{{order.totalAmount}}</text></view>
+    </view>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="card info-card">
+    <view class="card-title">订单信息</view>
+    <view class="info-row">
+      <text class="label">订单号</text>
+      <view class="value copy" bindtap="onCopy">#{{order.orderNo}}（点击复制）</view>
+    </view>
+    <view class="info-row">
+      <text class="label">桌号</text>
+      <text class="value">{{order.tableCode}}桌</text>
+    </view>
+    <view class="info-row">
+      <text class="label">下单时间</text>
+      <text class="value">{{createdText}}</text>
+    </view>
+    <view class="info-row" wx:if="{{order.remark}}">
+      <text class="label">备注</text>
+      <text class="value">{{order.remark}}</text>
+    </view>
+  </view>
+
+  <!-- 操作区 -->
+  <view class="cancel-wrap" wx:if="{{canCancel}}">
+    <view class="cancel-btn" bindtap="onCancel">取消订单</view>
+  </view>
+
+  <view class="bottom-bar safe-area">
+    <view class="btn-primary bar-btn {{canReorder ? '' : 'disabled'}}" bindtap="onReorder">再来一单</view>
+  </view>
+</view>

@@ -1,0 +1,45 @@
+<view class="page" wx:if="{{dish}}">
+  <image class="hero" src="{{dish.image}}" mode="aspectFill" />
+
+  <view class="body">
+    <!-- 基本信息 -->
+    <view class="card info-card">
+      <view class="row-top">
+        <view class="name ellipsis">{{dish.name}}</view>
+        <view wx:if="{{dish.status === 'soldout'}}" class="soldout-tag">已售罄</view>
+      </view>
+      <view class="row-mid">
+        <view class="price"><text class="rmb">¥</text>{{unitPrice}}</view>
+        <view class="meta">月售 {{dish.sales}}</view>
+      </view>
+      <view class="desc">{{dish.description}}</view>
+    </view>
+
+    <!-- 规格选择 -->
+    <view class="card spec-card" wx:if="{{groups.length}}">
+      <view class="spec-group" wx:for="{{groups}}" wx:key="id" wx:for-item="group">
+        <view class="group-title">{{group.name}}</view>
+        <view class="chips">
+          <view
+            wx:for="{{group.options}}"
+            wx:key="id"
+            wx:for-item="opt"
+            wx:for-index="oi"
+            class="chip {{opt.active ? 'active' : ''}}"
+            data-gi="{{index}}"
+            data-oi="{{oi}}"
+            bindtap="onOption"
+          >{{opt.label}}<text wx:if="{{opt.priceDelta > 0}}" class="delta">+{{opt.priceDelta}}</text></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数量：标题左、步进器右（右下角位置，与价格对角呼应） -->
+    <view class="card qty-card">
+      <view class="qty-row">
+        <view class="group-title qty-title">数量</view>
+        <stepper value="{{count}}" bind:minus="onMinus" bind:plus="onPlus" />
+      </view>
+    </view>
+  </view>
+</view>

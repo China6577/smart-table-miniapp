@@ -1,0 +1,96 @@
+.page {
+  min-height: 100vh;
+  padding: 20rpx 24rpx 60rpx;
+}
+
+.loading {
+  padding: 120rpx 0;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+.order-card {
+  padding: 28rpx 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order-no {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.status {
+  font-size: 24rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+}
+
+/* 待接单：橙 */
+.status.pending {
+  color: var(--accent);
+  background: rgba(255, 122, 0, 0.12);
+}
+
+/* 进行中：绿 */
+.status.doing {
+  color: var(--brand);
+  background: var(--brand-light);
+}
+
+/* 已完成：灰 */
+.status.done {
+  color: var(--text-3);
+  background: #f2f3f5;
+}
+
+/* 已取消：红 */
+.status.cancel {
+  color: var(--danger);
+  background: rgba(250, 81, 81, 0.1);
+}
+
+.order-meta {
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: var(--text-3);
+}
+
+.order-foot {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dishes {
+  flex: 1;
+  min-width: 0;
+  font-size: 24rpx;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.amount {
+  flex-shrink: 0;
+  margin-left: 20rpx;
+  color: var(--price);
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.amount .rmb {
+  font-size: 24rpx;
+}
+
+.empty-wrap {
+  padding: 80rpx 60rpx;
+}

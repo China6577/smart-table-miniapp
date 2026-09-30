@@ -1,0 +1,115 @@
+/**
+ * 全局主题与公共样式
+ * 定位：真实餐厅软件 —— 白底 + 绿色主色 + 橙色价格，大按钮、大字号，适老化操作。
+ */
+page {
+  /* 主题色 */
+  --brand: #00a862;        /* 主绿：操作/确认 */
+  --brand-deep: #00894f;
+  --brand-light: #e8f8f0;
+  --price: #ff5a00;        /* 橙：价格/营销 */
+  --accent: #ff7a00;
+  --danger: #fa5151;
+  /* 文本与背景 */
+  --text: #232323;
+  --text-2: #6b6b6b;
+  --text-3: #9a9a9a;
+  --bg: #f5f6f7;
+  --border: #ececec;
+  --radius: 16rpx;
+
+  background: var(--bg);
+  color: var(--text);
+  font-size: 28rpx;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+view,
+text,
+image,
+button,
+input,
+textarea,
+scroll-view {
+  box-sizing: border-box;
+}
+
+/* ---------- 通用工具类 ---------- */
+
+/* 单行省略 */
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 两行省略 */
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* 卡片 */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+}
+
+/* 卡片标题 */
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20rpx;
+}
+
+/* 主按钮：大按钮、大字号，方便年长顾客点按 */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.btn-primary.disabled {
+  background: #c9c9c9;
+}
+
+/* 幽灵按钮 */
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border-radius: 44rpx;
+  border: 2rpx solid var(--brand);
+  background: #fff;
+  color: var(--brand);
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+/* 价格 */
+.price {
+  color: var(--price);
+  font-weight: 700;
+}
+
+.price .rmb {
+  font-size: 0.72em;
+  margin-right: 2rpx;
+}
+
+/* 底部安全区（iPhone 全面屏） */
+.safe-area {
+  padding-bottom: env(safe-area-inset-bottom);
+}

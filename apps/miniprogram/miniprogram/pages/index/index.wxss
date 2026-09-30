@@ -1,0 +1,191 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ---------- 顶部餐厅信息 ---------- */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24rpx 32rpx 0;
+}
+
+.rest-name {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--text);
+  max-width: 480rpx;
+}
+
+.rest-notice {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+  max-width: 480rpx;
+}
+
+.orders-link {
+  flex-shrink: 0;
+  font-size: 26rpx;
+  color: var(--brand);
+  padding: 8rpx 0 8rpx 16rpx;
+}
+
+/* ---------- 桌号横幅 ---------- */
+
+.table-banner {
+  margin: 20rpx 32rpx 0;
+  padding: 28rpx 32rpx;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
+  border-radius: var(--radius);
+  color: #fff;
+}
+
+.table-code {
+  background: #fff;
+  color: var(--brand-deep);
+  font-size: 32rpx;
+  font-weight: 700;
+  padding: 14rpx 24rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+}
+
+.welcome {
+  margin-left: 24rpx;
+  min-width: 0;
+}
+
+.welcome-title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.welcome-sub {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  opacity: 0.85;
+}
+
+/* ---------- 搜索入口 ---------- */
+
+.search-entry {
+  margin: 20rpx 32rpx 0;
+  height: 76rpx;
+  border-radius: 38rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 28rpx;
+}
+
+/* CSS 绘制的放大镜图标 */
+.search-icon {
+  position: relative;
+  width: 26rpx;
+  height: 26rpx;
+  border: 3rpx solid var(--text-3);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.search-icon::after {
+  content: '';
+  position: absolute;
+  right: -9rpx;
+  bottom: -6rpx;
+  width: 14rpx;
+  height: 3rpx;
+  background: var(--text-3);
+  transform: rotate(45deg);
+  border-radius: 2rpx;
+}
+
+.search-text {
+  margin-left: 16rpx;
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+/* ---------- 菜单主体 ---------- */
+
+.menu-body {
+  flex: 1;
+  display: flex;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+
+.cat-nav {
+  width: 180rpx;
+  height: 100%;
+  background: #f2f3f5;
+  flex-shrink: 0;
+}
+
+.cat-item {
+  padding: 30rpx 16rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--text-2);
+  position: relative;
+}
+
+.cat-item.active {
+  background: #fff;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.cat-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 36rpx;
+  background: var(--brand);
+  border-radius: 0 8rpx 8rpx 0;
+}
+
+.dish-scroll {
+  flex: 1;
+  /* 关键：覆盖 flex 子项默认 min-width:auto，允许收缩到内容宽度以下，
+  否则 scroll-view 被内部内容撑出屏幕右缘（实测超 27px） */
+  min-width: 0;
+  height: 100%;
+  background: #fff;
+}
+
+.loading {
+  padding: 120rpx 0;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+.dish-list {
+  padding: 0 24rpx 220rpx;
+}
+
+/* ---------- 加购飞入动画 ---------- */
+/* 小球样式纯静态：位置/缩放每帧由 JS setData 驱动（CSS 动画/过渡对动态值
+   在部分渲染管线不生效，帧驱动是小程序购物车飞入的通用可靠方案） */
+.fly-ball {
+  position: fixed;
+  z-index: 200;
+  pointer-events: none;
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: var(--price);
+  box-shadow: 0 4rpx 12rpx rgba(255, 90, 0, 0.45);
+}

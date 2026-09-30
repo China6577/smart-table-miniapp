@@ -1,0 +1,67 @@
+# 智能桌台扫码点餐系统 —— 后端编排（API + PostgreSQL + Redis）
+# 启动：docker compose up -d --build
+# 停止：docker compose down（保留数据）；docker compose down -v 连同数据卷一起删除
+name: smart-table
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: smart-table-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: smarttable
+      POSTGRES_PASSWORD: smarttable
+      POSTGRES_DB: smart_table
+      TZ: Asia/Shanghai
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U smarttable -d smart_table']
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  redis:
+    image: redis:7-alpine
+    container_name: smart-table-redis
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  api:
+    build: ./server
+    container_name: smart-table-api
+    restart: unless-stopped
+    environment:
+      # 开发编排显式声明（覆盖 Dockerfile 的 NODE_ENV=production，避免误触发生产启动自检）
+      NODE_ENV: development
+      PORT: '3000'
+      DATABASE_URL: postgres://smarttable:smarttable@postgres:5432/smart_table
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: smart-table-demo-secret
+      JWT_EXPIRES_IN: 12h
+      # 首次启动播种演示数据（30 道菜 / 18 桌 / 5 员工 / 近 30 天订单）
+      SEED_DEMO: 'true'
+      # 演示专用：开放 /api/dev/*（顾客下单模拟器、重置演示数据）；生产必须改为 false
+      ALLOW_DEV_ENDPOINTS: 'true'
+      TZ: Asia/Shanghai
+    ports:
+      # 宿主机 3100 → 容器 3000（Windows 端口排除范围占用 3000）
+      - '3100:3000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:

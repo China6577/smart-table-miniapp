@@ -1,0 +1,46 @@
+<view class="page">
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <view class="search-icon" />
+    <input
+      class="search-input"
+      placeholder="搜索菜品名称"
+      placeholder-class="ph"
+      value="{{keyword}}"
+      focus
+      confirm-type="search"
+      bindinput="onInput"
+    />
+    <view wx:if="{{keyword}}" class="clear" bindtap="onClear">×</view>
+  </view>
+
+  <!-- 热门搜索 -->
+  <view wx:if="{{!searched && hotKeywords.length}}" class="hot">
+    <view class="hot-title">热门搜索</view>
+    <view class="hot-chips">
+      <view
+        wx:for="{{hotKeywords}}"
+        wx:key="*this"
+        class="hot-chip"
+        data-word="{{item}}"
+        bindtap="onHotTap"
+      >{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <scroll-view scroll-y class="result">
+    <view wx:if="{{results.length}}" class="result-list">
+      <dish-card
+        wx:for="{{results}}"
+        wx:key="id"
+        dish="{{item}}"
+        count="{{item.cartCount}}"
+        bind:add="onAddDish"
+        bind:change="onDishCountChange"
+        bind:detail="onDishDetail"
+      />
+    </view>
+    <empty-state wx:if="{{searched && !results.length}}" text="未找到相关菜品" sub="换个关键词试试" />
+  </scroll-view>
+</view>

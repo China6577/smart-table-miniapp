@@ -1,0 +1,223 @@
+.dish-card {
+  display: flex;
+  padding: 24rpx 0;
+}
+
+.dish-card + .dish-card {
+  border-top: 1rpx solid var(--border);
+}
+
+.pic-wrap {
+  position: relative;
+  width: 168rpx;
+  height: 168rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f0f1f2;
+}
+
+.pic {
+  width: 100%;
+  height: 100%;
+}
+
+.pic.soldout {
+  filter: grayscale(1);
+  opacity: 0.65;
+}
+
+.soldout-tag {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 22rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 999rpx;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 月售贴菜名（元信息跟随主语）：省一行高度提升列表密度，价格左下/月售右上形成对角平衡 */
+.name-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.desc {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: var(--text-3);
+}
+
+.meta {
+  flex-shrink: 0;
+  margin-left: 12rpx;
+  font-size: 20rpx;
+  color: var(--text-3);
+}
+
+.bottom {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  color: var(--price);
+  font-size: 34rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: baseline;
+}
+
+.price .rmb {
+  font-size: 24rpx;
+}
+
+.price .from {
+  font-size: 22rpx;
+  font-weight: 400;
+  color: var(--text-3);
+  margin-left: 4rpx;
+}
+
+/* +/− 符号用 CSS 线条绘制：文字符号在不同字体基线下会偏移，线条永远几何居中 */
+.add-btn {
+  position: relative;
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.add-btn::before,
+.add-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 2rpx;
+}
+
+.add-btn::before {
+  width: 24rpx;
+  height: 4rpx;
+}
+
+.add-btn::after {
+  width: 4rpx;
+  height: 24rpx;
+}
+
+/* 列表内迷你步进器（- 数字 +），宽度预留两位数不跳动 */
+.mini-stepper {
+  display: flex;
+  align-items: center;
+}
+
+.m-num {
+  min-width: 64rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.m-btn {
+  position: relative;
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.m-btn::before,
+.m-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2rpx;
+}
+
+.m-plus {
+  background: var(--brand);
+}
+
+.m-plus::before,
+.m-plus::after {
+  background: #fff;
+}
+
+.m-plus::before {
+  width: 24rpx;
+  height: 4rpx;
+}
+
+.m-plus::after {
+  width: 4rpx;
+  height: 24rpx;
+}
+
+.m-minus {
+  border: 2rpx solid var(--brand);
+  background: #fff;
+}
+
+.m-minus::before {
+  width: 22rpx;
+  height: 4rpx;
+  background: var(--brand);
+}
+
+/* 按压反馈：缩小 + 轻微降透明，配合飞入动画形成「点下去有响应」的手感 */
+.btn-pressed {
+  transform: scale(0.86);
+  opacity: 0.85;
+}
+
+.spec-btn {
+  position: relative;
+  background: var(--brand);
+  color: #fff;
+  font-size: 24rpx;
+  padding: 10rpx 26rpx;
+  border-radius: 999rpx;
+}
+
+.badge {
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  padding: 0 8rpx;
+  border-radius: 999rpx;
+  background: var(--price);
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+}

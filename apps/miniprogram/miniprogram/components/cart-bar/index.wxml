@@ -1,0 +1,10 @@
+<view class="cart-bar">
+  <view class="cart-icon {{count > 0 ? 'active' : ''}} {{popping ? 'pop' : ''}}" catchtap="onCartTap">
+    <view wx:if="{{count > 0}}" class="cart-badge {{popping ? 'pop' : ''}}">{{count}}</view>
+  </view>
+  <view class="cart-total">
+    <view class="amount ellipsis"><text class="rmb">¥</text>{{amount}}</view>
+    <view class="hint ellipsis">{{count > 0 ? '已选 ' + count + ' 件' : '未选购商品'}}</view>
+  </view>
+  <view class="submit {{count > 0 ? '' : 'disabled'}}" catchtap="onSubmit">去结算</view>
+</view>

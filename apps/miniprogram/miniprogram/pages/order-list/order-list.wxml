@@ -1,0 +1,35 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="loading">订单加载中…</view>
+
+  <block wx:else>
+    <view wx:if="{{orders.length}}">
+      <view
+        class="card order-card"
+        wx:for="{{orders}}"
+        wx:key="orderNo"
+        data-order-no="{{item.orderNo}}"
+        bindtap="onOrderTap"
+      >
+        <view class="card-head">
+          <view class="order-no">#{{item.orderNo}}</view>
+          <view class="status {{item.statusClass}}">{{item.statusText}}</view>
+        </view>
+        <view class="order-meta">
+          <view>{{item.tableCode}}桌 · {{item.timeText}}</view>
+          <view>共 {{item.itemCount}} 件</view>
+        </view>
+        <view class="order-foot">
+          <view class="dishes ellipsis">
+            <text wx:for="{{item.items}}" wx:for-item="line" wx:key="key" class="dish-name">{{line.name}}×{{line.quantity}} </text>
+          </view>
+          <view class="amount"><text class="rmb">¥</text>{{item.totalAmount}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-wrap">
+      <empty-state text="还没有订单" sub="去点一桌好吃的吧" />
+      <view class="btn-primary go-ordering" bindtap="goOrdering">去点餐</view>
+    </view>
+  </block>
+</view>

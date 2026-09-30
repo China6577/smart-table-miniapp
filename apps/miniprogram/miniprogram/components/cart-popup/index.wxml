@@ -1,0 +1,24 @@
+<view class="mask {{visible ? 'show' : ''}}" bindtap="onClose" catchtouchmove="noop" />
+<view class="panel {{visible ? 'show' : ''}}" catchtouchmove="noop">
+  <view class="panel-head">
+    <view class="panel-title">购物车</view>
+    <view class="clear" catchtap="onClear">清空</view>
+  </view>
+
+  <scroll-view scroll-y class="panel-list">
+    <view wx:if="{{items.length === 0}}" class="empty-wrap">
+      <empty-state text="购物车还是空的" sub="去挑几道喜欢的菜吧" />
+    </view>
+    <view wx:for="{{items}}" wx:key="key" class="cart-item">
+      <image class="item-pic" src="{{item.image}}" mode="aspectFill" />
+      <view class="item-info">
+        <view class="item-name ellipsis">{{item.name}}</view>
+        <view wx:if="{{item.specText}}" class="item-spec ellipsis">{{item.specText}}</view>
+        <view class="item-price"><text class="rmb">¥</text>{{item.unitPrice}}</view>
+      </view>
+      <view class="item-stepper" data-key="{{item.key}}" bind:minus="onMinus" bind:plus="onPlus" bind:empty="onRemove">
+        <stepper value="{{item.count}}" />
+      </view>
+    </view>
+  </scroll-view>
+</view>

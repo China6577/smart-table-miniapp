@@ -1,0 +1,12 @@
+{
+  "name": "smart-table-miniapp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "智能桌台扫码点餐系统（顾客小程序 / 商家后台 / 厨房 KDS / NestJS 后端）",
+  "scripts": {
+    "mp:lint": "pnpm --filter smart-table-miniprogram lint",
+    "mp:images": "pnpm --filter smart-table-miniprogram gen:images",
+    "admin:dev": "pnpm --filter @smart-table/admin dev",
+    "admin:build": "pnpm --filter @smart-table/admin build"
+  }
+}

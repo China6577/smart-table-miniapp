@@ -1,0 +1,39 @@
+<view class="mask {{visible ? 'show' : ''}}" bindtap="onClose" catchtouchmove="noop" />
+<view class="popup {{visible ? 'show' : ''}}" catchtouchmove="noop">
+  <view class="popup-head">
+    <image class="popup-pic" src="{{dish.image}}" mode="aspectFill" />
+    <view class="popup-info">
+      <view class="popup-name ellipsis">{{dish.name}}</view>
+      <view class="popup-price"><text class="rmb">¥</text>{{unitPrice}}</view>
+      <view wx:if="{{specText}}" class="popup-spec ellipsis">已选：{{specText}}</view>
+    </view>
+    <view class="popup-close" catchtap="onClose">×</view>
+  </view>
+
+  <scroll-view scroll-y class="popup-body">
+    <view class="spec-group" wx:for="{{groups}}" wx:key="id" wx:for-item="group">
+      <view class="group-name">{{group.name}}</view>
+      <view class="group-options">
+        <view
+          wx:for="{{group.options}}"
+          wx:key="id"
+          wx:for-item="opt"
+          wx:for-index="oi"
+          class="option {{opt.active ? 'active' : ''}}"
+          data-gi="{{index}}"
+          data-oi="{{oi}}"
+          catchtap="onOption"
+        >{{opt.label}}</view>
+      </view>
+    </view>
+
+    <view class="qty-row">
+      <view class="group-name">数量</view>
+      <stepper value="{{count}}" bind:minus="onMinus" bind:plus="onPlus" />
+    </view>
+  </scroll-view>
+
+  <view class="popup-foot safe-area">
+    <view class="confirm-btn" catchtap="onConfirm">加入购物车</view>
+  </view>
+</view>

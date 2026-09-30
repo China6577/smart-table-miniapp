@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "stepper": "/components/stepper/index",
+    "empty-state": "/components/empty-state/index"
+  }
+}

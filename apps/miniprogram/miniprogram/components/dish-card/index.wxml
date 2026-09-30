@@ -1,0 +1,31 @@
+<view class="dish-card" bindtap="onDetail">
+  <view class="pic-wrap">
+    <image class="pic {{dish.status === 'soldout' ? 'soldout' : ''}}" src="{{dish.image}}" mode="aspectFill" lazy-load />
+    <view wx:if="{{dish.status === 'soldout'}}" class="soldout-tag">已售罄</view>
+  </view>
+
+  <view class="info">
+    <view class="name-row">
+      <view class="name ellipsis">{{dish.name}}</view>
+      <view class="meta">月售 {{dish.sales}}</view>
+    </view>
+    <view class="desc ellipsis">{{dish.description}}</view>
+    <view class="bottom">
+      <view class="price"><text class="rmb">¥</text>{{dish.price}}<text wx:if="{{hasSpec}}" class="from">起</text></view>
+      <view wx:if="{{dish.status !== 'soldout'}}" class="action">
+        <!-- 有规格：必须经规格弹层选择，保持选规格按钮 + 已选角标 -->
+        <view wx:if="{{hasSpec}}" class="spec-btn" catchtap="onAdd">
+          选规格
+          <view wx:if="{{count > 0}}" class="badge">{{count}}</view>
+        </view>
+        <!-- 无规格且已加购：列表内直接加减（- 数字 +） -->
+        <view wx:elif="{{count > 0}}" class="mini-stepper">
+          <view class="m-btn m-minus" hover-class="btn-pressed" hover-stay-time="80" catchtap="onMinus" />
+          <view class="m-num">{{count}}</view>
+          <view class="m-btn m-plus" hover-class="btn-pressed" hover-stay-time="80" catchtap="onPlus" />
+        </view>
+        <view wx:else class="add-btn" hover-class="btn-pressed" hover-stay-time="80" catchtap="onAdd" />
+      </view>
+    </view>
+  </view>
+</view>

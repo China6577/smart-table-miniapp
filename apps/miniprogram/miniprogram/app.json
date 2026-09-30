@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search",
+    "pages/dish-detail/dish-detail",
+    "pages/order-confirm/order-confirm",
+    "pages/order-list/order-list",
+    "pages/order-detail/order-detail"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "老地方家常菜",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f6f7",
+    "backgroundTextStyle": "dark"
+  },
+  "usingComponents": {
+    "dish-card": "/components/dish-card/index",
+    "stepper": "/components/stepper/index",
+    "spec-popup": "/components/spec-popup/index",
+    "cart-bar": "/components/cart-bar/index",
+    "cart-popup": "/components/cart-popup/index",
+    "empty-state": "/components/empty-state/index"
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

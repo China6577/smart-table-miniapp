@@ -1,0 +1,6 @@
+<view class="stepper">
+  <!-- 符号由 CSS 线条绘制，保证几何居中 -->
+  <view class="s-btn minus {{value <= min ? 'off' : ''}}" catchtap="onMinus" />
+  <view class="s-num">{{value}}</view>
+  <view class="s-btn plus" catchtap="onPlus" />
+</view>

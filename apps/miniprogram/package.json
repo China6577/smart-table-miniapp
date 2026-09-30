@@ -1,0 +1,14 @@
+{
+  "name": "smart-table-miniprogram",
+  "version": "1.0.0",
+  "private": true,
+  "description": "智能桌台扫码点餐系统 - 顾客微信小程序（原生 + TypeScript）",
+  "scripts": {
+    "lint": "tsc --noEmit",
+    "gen:images": "node scripts/gen-dish-images.mjs"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "^3.12.1",
+    "typescript": "^5.6.3"
+  }
+}

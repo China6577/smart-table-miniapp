@@ -1,0 +1,62 @@
+<view class="page">
+  <!-- 用餐信息 -->
+  <view class="card table-card">
+    <view class="table-code">{{tableCode}}桌</view>
+    <view class="table-info">
+      <view class="rest-name ellipsis">{{restaurant.name}}</view>
+      <view class="rest-sub ellipsis">用餐人数由服务员确认 · 有问题可呼叫服务员</view>
+    </view>
+  </view>
+
+  <!-- 菜品清单 -->
+  <view class="card items-card">
+    <view class="card-title">菜品清单</view>
+    <view wx:if="{{items.length}}">
+      <view class="item" wx:for="{{items}}" wx:key="key">
+        <image class="item-pic" src="{{item.image}}" mode="aspectFill" />
+        <view class="item-info">
+          <view class="item-name ellipsis">{{item.name}}</view>
+          <view wx:if="{{item.specText}}" class="item-spec ellipsis">{{item.specText}}</view>
+          <view class="item-price"><text class="rmb">¥</text>{{item.unitPrice}}</view>
+        </view>
+        <view class="item-right">
+          <view class="qty">×{{item.count}}</view>
+          <view class="subtotal">¥{{item.unitPrice * item.count}}</view>
+        </view>
+      </view>
+      <view class="total-row">
+        <text>共 {{itemCount}} 件</text>
+        <view class="total">合计 <text class="price"><text class="rmb">¥</text>{{totalAmount}}</text></view>
+      </view>
+    </view>
+    <view wx:else class="cart-empty">
+      <empty-state text="购物车是空的" sub="请先去选择菜品" />
+      <view class="btn-primary go-ordering" bindtap="goOrdering">去点餐</view>
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="card remark-card" wx:if="{{items.length}}">
+    <view class="card-title">口味备注</view>
+    <textarea
+      class="remark-input"
+      value="{{remark}}"
+      maxlength="50"
+      placeholder="如：少油、多放葱等（选填）"
+      placeholder-class="ph"
+      bindinput="onRemarkInput"
+    />
+    <view class="remark-count">{{remark.length}}/50</view>
+  </view>
+
+  <!-- 提交栏 -->
+  <view class="bottom-bar safe-area" wx:if="{{items.length}}">
+    <view class="bar-total">
+      <view class="amount"><text class="rmb">¥</text>{{totalAmount}}</view>
+      <view class="hint">共 {{itemCount}} 件</view>
+    </view>
+    <view class="submit-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">
+      {{submitting ? '提交中…' : '提交订单'}}
+    </view>
+  </view>
+</view>

@@ -1,0 +1,69 @@
+.stepper {
+  display: flex;
+  align-items: center;
+}
+
+/* +/− 符号用 CSS 线条绘制：文字符号随字体基线偏移，线条永远居中 */
+.s-btn {
+  position: relative;
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.s-btn::before,
+.s-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2rpx;
+}
+
+.s-btn.minus {
+  border: 2rpx solid var(--brand);
+  background: #fff;
+}
+
+.s-btn.minus::before {
+  width: 22rpx;
+  height: 4rpx;
+  background: var(--brand);
+}
+
+.s-btn.minus.off {
+  border-color: #d8d8d8;
+}
+
+.s-btn.minus.off::before {
+  background: #d8d8d8;
+}
+
+.s-btn.plus {
+  background: var(--brand);
+}
+
+.s-btn.plus::before,
+.s-btn.plus::after {
+  background: #fff;
+}
+
+.s-btn.plus::before {
+  width: 24rpx;
+  height: 4rpx;
+}
+
+.s-btn.plus::after {
+  width: 4rpx;
+  height: 24rpx;
+}
+
+.s-num {
+  min-width: 72rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+}

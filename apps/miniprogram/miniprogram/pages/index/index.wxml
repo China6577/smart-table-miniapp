@@ -1,0 +1,79 @@
+<view class="page">
+  <!-- 顶部餐厅信息 -->
+  <view class="header">
+    <view class="header-main">
+      <view class="rest-name ellipsis">{{restaurant.name}}</view>
+      <view class="rest-notice ellipsis">{{restaurant.announcement}}</view>
+    </view>
+    <view class="orders-link" bindtap="goOrders">我的订单</view>
+  </view>
+
+  <!-- 桌号横幅 -->
+  <view class="table-banner">
+    <view class="table-code">{{tableCode}}桌</view>
+    <view class="welcome">
+      <view class="welcome-title">欢迎光临</view>
+      <view class="welcome-sub">扫码点餐，下单后厨房实时接单</view>
+    </view>
+  </view>
+
+  <!-- 搜索入口 -->
+  <view class="search-entry" bindtap="goSearch">
+    <view class="search-icon" />
+    <text class="search-text">搜索菜品</text>
+  </view>
+
+  <!-- 分类导航 + 菜品列表 -->
+  <view class="menu-body">
+    <scroll-view class="cat-nav" scroll-y enhanced show-scrollbar="{{false}}">
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="cat-item {{activeCategory === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="selectCategory"
+      >{{item.name}}</view>
+    </scroll-view>
+
+    <scroll-view class="dish-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+      <view wx:if="{{loading}}" class="loading">菜单加载中…</view>
+      <view wx:else class="dish-list">
+        <dish-card
+          wx:for="{{dishes}}"
+          wx:key="id"
+          dish="{{item}}"
+          count="{{item.cartCount}}"
+          bind:add="onAddDish"
+          bind:change="onDishCountChange"
+          bind:detail="onDishDetail"
+        />
+        <empty-state wx:if="{{dishes.length === 0}}" text="该分类暂无菜品" sub="看看其他分类吧" />
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 购物车弹层 -->
+  <cart-popup
+    visible="{{showCart}}"
+    items="{{cartItems}}"
+    bind:close="closeCart"
+    bind:clear="onCartClear"
+    bind:minus="onCartMinus"
+    bind:plus="onCartPlus"
+    bind:remove="onCartRemove"
+  />
+
+  <!-- 规格选择弹层 -->
+  <spec-popup
+    dish="{{specDish}}"
+    visible="{{!!specDish}}"
+    bind:close="onSpecClose"
+    bind:confirm="onSpecConfirm"
+  />
+
+  <!-- 底部购物车栏 -->
+  <cart-bar id="cart-bar" count="{{cartCount}}" amount="{{cartAmount}}" bind:cart="openCart" bind:submit="goConfirm" />
+
+  <!-- 加购飞入动画：小球从 + 按钮抛物线落入购物车图标（JS 逐帧驱动） -->
+  <view wx:if="{{fly.active}}" class="fly-ball" style="left: {{fly.left}}px; top: {{fly.top}}px; transform: scale({{fly.scale}});" />
+</view>

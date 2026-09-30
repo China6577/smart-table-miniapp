@@ -1,0 +1,130 @@
+.page {
+  min-height: 100vh;
+  /* 底部操作栏已移除，收敛预留空间 */
+  padding-bottom: 40rpx;
+  background: var(--bg);
+}
+
+.hero {
+  width: 100%;
+  height: 520rpx;
+  display: block;
+  background: #f0f1f2;
+}
+
+.body {
+  padding: 20rpx 24rpx 0;
+}
+
+/* ---------- 基本信息 ---------- */
+
+.info-card {
+  padding: 28rpx 32rpx;
+}
+
+.row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 38rpx;
+  font-weight: 700;
+  max-width: 520rpx;
+}
+
+.soldout-tag {
+  flex-shrink: 0;
+  background: #f2f3f5;
+  color: var(--text-3);
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+}
+
+.row-mid {
+  margin-top: 18rpx;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.price {
+  color: var(--price);
+  font-size: 44rpx;
+  font-weight: 700;
+}
+
+.price .rmb {
+  font-size: 28rpx;
+}
+
+.meta {
+  font-size: 24rpx;
+  color: var(--text-3);
+}
+
+.desc {
+  margin-top: 18rpx;
+  font-size: 26rpx;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* ---------- 规格 ---------- */
+
+.spec-card,
+.qty-card {
+  margin-top: 20rpx;
+  padding: 28rpx 32rpx;
+}
+
+.group-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+}
+
+/* 数量卡片：标题与步进器同行，步进器落右下角 */
+.qty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qty-title {
+  margin-bottom: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.chip {
+  padding: 12rpx 32rpx;
+  border-radius: 999rpx;
+  background: #f2f3f5;
+  color: var(--text-2);
+  font-size: 26rpx;
+}
+
+.chip.active {
+  background: var(--brand-light);
+  color: var(--brand);
+  font-weight: 600;
+  border: 2rpx solid var(--brand);
+}
+
+.delta {
+  font-size: 22rpx;
+  margin-left: 4rpx;
+}
+
+.qty-card .group-title {
+  margin-bottom: 0;
+}
+
+

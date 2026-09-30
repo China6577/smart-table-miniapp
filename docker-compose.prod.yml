@@ -1,0 +1,36 @@
+# 生产环境覆盖层：与基础编排叠加使用
+#   启动：docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#   变量：同目录 .env（参考 .env.example），JWT_SECRET 必填
+#
+# 与默认编排的差异：
+# - NODE_ENV=production：后端启动自检（弱 JWT_SECRET / dev 端点开启 / 播种演示数据都会拒绝启动）
+# - 关闭 /api/dev/* 调试端点与演示数据播种
+# - PostgreSQL / Redis 端口不再对宿主机暴露（仅容器网络内可达）
+# - API 增加健康检查探针
+services:
+  postgres:
+    # !override 标签整体替换基础文件的 ports（需要 Docker Compose v2.24+）
+    ports: !override []
+
+  redis:
+    ports: !override []
+
+  api:
+    environment:
+      NODE_ENV: production
+      # 必填：缺失或使用内置演示密钥时容器将启动失败（fail fast）
+      JWT_SECRET: ${JWT_SECRET:?需要在 .env 中配置强随机 JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-12h}
+      # 生产安全开关：全部关闭
+      ALLOW_DEV_ENDPOINTS: 'false'
+      SEED_DEMO: 'false'
+      # 跨域白名单（逗号分隔）；留空则不限制，生产建议收敛到管理后台域名
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+      # 桌码二维码跳转地址（小程序正式域名）
+      QR_CONTENT_TEMPLATE: ${QR_CONTENT_TEMPLATE:-}
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -qO- http://localhost:3000/api/health >/dev/null 2>&1 || exit 1']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
