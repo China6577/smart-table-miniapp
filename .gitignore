@@ -4,3 +4,4 @@ dist/
 *.local
 miniprogram_npm/
 .env
+project.private.config.json
